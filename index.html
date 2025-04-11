@@ -3,526 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Experimental Artistic Web</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Pixelify+Sans&family=Playfair+Display:ital@1&family=Rubik+Mono+One&display=swap">
     <style>
         :root {
-            --primary: #0f0;
-            --secondary: #ff00aa;
-            --dark: #111;
-            --darker: #080808;
-            --light: #eee;
+            --cyberpunk-pink: #ff2a6d;
+            --glitch-blue: #05d9e8;
+            --acid-green: #d1f7a3;
+            --vaporwave-purple: #9d00ff;
+            --y2k-yellow: #fff01f;
+            --grunge-brown: #5e4a3a;
+            --glass-white: rgba(255, 255, 255, 0.7);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: var(--dark);
-            color: var(--light);
-            line-height: 1.6;
+            background: #000;
+            color: white;
             overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, var(--vaporwave-purple), transparent 20%),
+                radial-gradient(circle at 90% 80%, var(--glitch-blue), transparent 20%),
+                linear-gradient(to bottom, #000, #111);
+            min-height: 100vh;
         }
         
-        /* Glow efekt */
-        .glow {
-            text-shadow: 0 0 10px var(--primary);
-        }
-        
-        /* Header */
-        header {
-            background: linear-gradient(to right, var(--darker), var(--dark));
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(15,255,0,0.1) 0%, rgba(0,0,0,0) 70%);
-            animation: rotate 20s linear infinite;
-            z-index: 0;
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-        
+        /* Artistic Typography Mix */
         h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            font-family: 'Rubik Mono One', sans-serif;
+            font-size: 4rem;
+            background: linear-gradient(45deg, var(--cyberpunk-pink), var(--y2k-yellow));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-        }
-        
-        .tagline {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            margin-bottom: 1.5rem;
-        }
-        
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        nav a {
-            color: var(--light);
-            text-decoration: none;
-            padding: 1rem 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        nav a:hover {
-            color: var(--primary);
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-        
-        nav a:hover::after {
-            width: 70%;
-        }
-        
-        /* Main content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        section {
-            margin-bottom: 4rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s, transform 0.6s;
-        }
-        
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
+            text-shadow: 0 0 10px rgba(255, 42, 109, 0.3);
+            letter-spacing: -3px;
+            line-height: 1;
+            margin-bottom: 1rem;
         }
         
         h2 {
-            font-size: 2rem;
+            font-family: 'Pixelify Sans', cursive;
+            font-size: 2.5rem;
+            color: var(--acid-green);
+            text-transform: uppercase;
             margin-bottom: 1.5rem;
-            color: var(--primary);
             position: relative;
             display: inline-block;
         }
         
         h2::after {
-            content: '';
+            content: '✺✺✺';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--secondary);
+            color: var(--cyberpunk-pink);
+            font-size: 1rem;
         }
         
-        /* Projects grid */
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .project-card {
-            background: var(--darker);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(15,255,0,0.1);
-            border-color: var(--primary);
-        }
-        
-        .project-img {
-            height: 200px;
-            background: #222;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--primary);
-        }
-        
-        .project-info {
-            padding: 1.5rem;
-        }
-        
-        .project-info h3 {
-            margin-bottom: 0.5rem;
-            color: var(--light);
-        }
-        
-        .project-info p {
-            color: rgba(255,255,255,0.7);
+        h3 {
+            font-family: 'Major Mono Display', monospace;
+            font-size: 1.5rem;
+            color: var(--glitch-blue);
             margin-bottom: 1rem;
         }
         
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        
-        .tag {
-            background: rgba(15,255,0,0.1);
-            color: var(--primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-        
-        /* Skills */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .skill-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            transition: background 0.3s ease;
-        }
-        
-        .skill-item:hover {
-            background: rgba(15,255,0,0.1);
-        }
-        
-        .skill-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-        
-        /* Contact */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: var(--light);
-            border-radius: 4px;
-            transition: border-color 0.3s ease;
-        }
-        
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: var(--dark);
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(15,255,0,0.3);
-        }
-        
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .contact-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-        
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: var(--darker);
-            margin-top: 4rem;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
+        p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
             margin-bottom: 1.5rem;
         }
         
-        .social-link {
-            color: var(--light);
-            font-size: 1.5rem;
-            transition: color 0.3s ease, transform 0.3s ease;
+        /* Artistic Layout */
+        .art-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+            position: relative;
         }
         
-        .social-link:hover {
-            color: var(--primary);
+        /* Glitch Art Section */
+        .glitch-section {
+            background: 
+                url('https://placeholder.pics/svg/300x200/DEDEDE/555555/GLITCH-ART') no-repeat,
+                linear-gradient(45deg, #000, #222);
+            background-blend-mode: overlay;
+            background-size: cover;
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+            border: 3px solid var(--cyberpunk-pink);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glitch-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                transparent 48%,
+                var(--glitch-blue) 49%,
+                var(--glitch-blue) 51%,
+                transparent 52%
+            );
+            background-size: 10px 10px;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+        
+        /* Vaporwave Card Grid */
+        .dream-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .dream-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--vaporwave-purple);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dream-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 10px 30px rgba(157, 0, 255, 0.3);
+        }
+        
+        .dream-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                url('https://placeholder.pics/svg/300x200/DEDEDE/555555/VAPORWAVE') no-repeat center/cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        /* Grunge Elements */
+        .grunge-border {
+            border: 12px solid transparent;
+            border-image: 
+                url('https://placeholder.pics/svg/300x100/DEDEDE/555555/GRUNGE-BORDER') 30 stretch;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        /* Cyberpunk Button */
+        .art-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--cyberpunk-pink), var(--vaporwave-purple));
+            color: black;
+            font-family: 'Major Mono Display', monospace;
+            font-weight: bold;
+            text-decoration: none;
+            border: none;
+            border-bottom: 4px solid var(--y2k-yellow);
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .art-button:hover {
+            filter: hue-rotate(45deg);
             transform: translateY(-3px);
+        }
+        
+        .art-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: all 0.5s ease;
+        }
+        
+        .art-button:hover::after {
+            left: 100%;
+        }
+        
+        /* Experimental Footer */
+        footer {
+            background: 
+                url('https://placeholder.pics/svg/1200x200/DEDEDE/555555/EXPERIMENTAL-FOOTER') no-repeat center/cover,
+                linear-gradient(to bottom, #000, #111);
+            background-blend-mode: lighten;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-top: 3px dashed var(--acid-green);
         }
         
         /* Responsive */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             
-            nav {
-                flex-wrap: wrap;
-            }
-            
-            nav a {
-                padding: 0.8rem 1rem;
+            .dream-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <h1 class="glow">WULFIK:3</h1>
-            <p class="tagline">Web Developer & UI Designer</p>
-            <div class="social-links">
-                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-    </header>
-    
-    <nav>
-        <a href="#about">O mně</a>
-        <a href="#projects">Projekty</a>
-        <a href="#skills">Dovednosti</a>
-        <a href="#contact">Kontakt</a>
-    </nav>
-    
-    <div class="container">
-        <section id="about">
-            <h2>O mně</h2>
-            <p>Jsem full-stack vývojář se specializací na moderní webové technologie. Mám více než 5 let zkušeností s tvorbou webových aplikací a uživatelských rozhraní. Rád vytvářím čisté, efektivní a vizuálně přitažlivé produkty.</p>
-            <p>Mé projekty kombinují technickou preciznost s kreativním designem. Neustále se vzdělávám a sleduji nejnovější trendy ve webovém vývoji.</p>
+    <div class="art-container">
+        <header class="grunge-border">
+            <h1>EXPERIMENTAL<br>ART WEB</h1>
+            <p>This is a playground where design styles collide and create something new. A fusion of cyberpunk, vaporwave, glitch art and grunge aesthetics.</p>
+            <button class="art-button">ENTER THE MATRIX</button>
+        </header>
+        
+        <section class="glitch-section">
+            <h2>GLITCH ART ZONE</h2>
+            <p>Where digital errors become beautiful accidents. The distorted reality reveals hidden patterns in the noise.</p>
+            <button class="art-button">CORRUPT DATA</button>
         </section>
         
-        <section id="projects">
-            <h2>Projekty</h2>
-            <div class="projects">
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>E-shop Platforma</h3>
-                        <p>Kompletní řešení pro online prodej s pokročilou administrací a analytikou.</p>
-                        <div class="project-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Node.js</span>
-                            <span class="tag">MongoDB</span>
-                        </div>
-                    </div>
+        <section>
+            <h2>DREAM SCAPES</h2>
+            <div class="dream-grid">
+                <div class="dream-card">
+                    <h3>VAPOR MEMORY</h3>
+                    <p>Nostalgia for a future that never was. Palm trees against neon sunsets in the digital desert.</p>
                 </div>
                 
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>Mobilní Aplikace</h3>
-                        <p>Aplikace pro správu osobních financí s synchronizací mezi zařízeními.</p>
-                        <div class="project-tags">
-                            <span class="tag">React Native</span>
-                            <span class="tag">Firebase</span>
-                            <span class="tag">Redux</span>
-                        </div>
-                    </div>
+                <div class="dream-card">
+                    <h3>CYBER GARDEN</h3>
+                    <p>Where nature meets technology. Bioluminescent plants with circuit board veins.</p>
                 </div>
                 
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>Analytický Dashboard</h3>
-                        <p>Real-time dashboard pro vizualizaci obchodních dat a metrik.</p>
-                        <div class="project-tags">
-                            <span class="tag">Vue.js</span>
-                            <span class="tag">D3.js</span>
-                            <span class="tag">Express</span>
-                        </div>
-                    </div>
+                <div class="dream-card">
+                    <h3>Y2K GHOST</h3>
+                    <p>The spirit of the new millennium. A time when we feared computers but loved their aesthetics.</p>
                 </div>
             </div>
         </section>
         
-        <section id="skills">
-            <h2>Dovednosti</h2>
-            <div class="skills-container">
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fab fa-js"></i></div>
-                    <div>JavaScript/ES6+</div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fab fa-react"></i></div>
-                    <div>React</div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fab fa-node-js"></i></div>
-                    <div>Node.js</div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fab fa-html5"></i></div>
-                    <div>HTML5</div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
-                    <div>CSS3/SASS</div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fas fa-database"></i></div>
-                    <div>MongoDB</div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
-                    <div>Git</div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fas fa-paint-brush"></i></div>
-                    <div>UI/UX Design</div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="contact">
-            <h2>Kontakt</h2>
-            <div class="contact-grid">
-                <div class="contact-form">
-                    <form>
-                        <input type="text" placeholder="Jméno" required>
-                        <input type="email" placeholder="Email" required>
-                        <input type="text" placeholder="Předmět">
-                        <textarea rows="5" placeholder="Zpráva" required></textarea>
-                        <button type="submit" class="btn">Odeslat</button>
-                    </form>
-                </div>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                        <div>jan.novak@example.com</div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
-                        <div>+420 123 456 789</div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div>Praha, Česká republika</div>
-                    </div>
-                </div>
-            </div>
+        <section class="grunge-border">
+            <h2>DIRTY REALISM</h2>
+            <p>The analog resistance in a digital world. Torn edges, ink smudges and the texture of real life breaking through the pixels.</p>
+            <button class="art-button">GET MESSY</button>
         </section>
     </div>
     
     <footer>
-        <p>&copy; 2023 Jan Novák. Všechna práva vyhrazena.</p>
+        <h2>THE END IS JUST THE BEGINNING</h2>
+        <p>Replace these placeholder images with your own artwork to complete the vision.</p>
     </footer>
-    
-    <script>
-        // Animace při scrollování
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('section');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-            
-            // Hladký scroll pro navigaci
-            document.querySelectorAll('nav a').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 20,
-                        behavior: 'smooth'
-                    });
-                });
-            });
-        });
-    </script>
 </body>
 </html>
