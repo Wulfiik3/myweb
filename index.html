@@ -3,119 +3,526 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Můj První Web</title>
+    <title>Dark Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #0f0;
+            --secondary: #ff00aa;
+            --dark: #111;
+            --darker: #080808;
+            --light: #eee;
+        }
+        
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
+            background-color: var(--dark);
+            color: var(--light);
             line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f4;
+            overflow-x: hidden;
         }
         
+        /* Glow efekt */
+        .glow {
+            text-shadow: 0 0 10px var(--primary);
+        }
+        
+        /* Header */
         header {
-            background: #35424a;
-            color: white;
-            padding: 1rem;
+            background: linear-gradient(to right, var(--darker), var(--dark));
+            padding: 2rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(15,255,0,0.1) 0%, rgba(0,0,0,0) 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Navigation */
         nav {
             display: flex;
             justify-content: center;
-            background: #e8491d;
-            padding: 0.5rem;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         nav a {
-            color: white;
+            color: var(--light);
             text-decoration: none;
-            padding: 0 15px;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+            position: relative;
         }
         
         nav a:hover {
-            font-weight: bold;
+            color: var(--primary);
         }
         
-        .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
         }
         
-        .main-content {
-            float: left;
+        nav a:hover::after {
             width: 70%;
-            padding: 20px;
         }
         
-        .sidebar {
-            float: right;
-            width: 30%;
-            padding: 20px;
-            background: #e6e6e6;
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
         }
         
-        footer {
-            clear: both;
-            background: #35424a;
-            color: white;
-            text-align: center;
+        section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+        }
+        
+        /* Projects grid */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: var(--darker);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(15,255,0,0.1);
+            border-color: var(--primary);
+        }
+        
+        .project-img {
+            height: 200px;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary);
+        }
+        
+        .project-info {
+            padding: 1.5rem;
+        }
+        
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+        
+        .project-info p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            background: rgba(15,255,0,0.1);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             padding: 1rem;
-            margin-top: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            transition: background 0.3s ease;
         }
         
+        .skill-item:hover {
+            background: rgba(15,255,0,0.1);
+        }
+        
+        .skill-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--light);
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(15,255,0,0.3);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--darker);
+            margin-top: 4rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-link {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .social-link:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .main-content, .sidebar {
-                width: 100%;
-                float: none;
+            h1 {
+                font-size: 2rem;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+            }
+            
+            nav a {
+                padding: 0.8rem 1rem;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Vítejte na mém webu</h1>
+        <div class="header-content">
+            <h1 class="glow">JAN NOVÁK</h1>
+            <p class="tagline">Web Developer & UI Designer</p>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
     </header>
     
     <nav>
-        <a href="#">Domů</a>
-        <a href="#">O nás</a>
-        <a href="#">Služby</a>
-        <a href="#">Kontakt</a>
+        <a href="#about">O mně</a>
+        <a href="#projects">Projekty</a>
+        <a href="#skills">Dovednosti</a>
+        <a href="#contact">Kontakt</a>
     </nav>
     
     <div class="container">
-        <div class="main-content">
-            <h2>O nás</h2>
-            <p>Vítejte na našem webu. Jsme malá firma specializující se na webový design a vývoj aplikací. Naše týmová práce a kreativní přístup nám umožňuje vytvářet skvělé produkty pro naše klienty.</p>
-            
-            <h2>Naše služby</h2>
-            <ul>
-                <li>Webdesign</li>
-                <li>Vývoj webových aplikací</li>
-                <li>SEO optimalizace</li>
-                <li>Grafický design</li>
-            </ul>
-        </div>
+        <section id="about">
+            <h2>O mně</h2>
+            <p>Jsem full-stack vývojář se specializací na moderní webové technologie. Mám více než 5 let zkušeností s tvorbou webových aplikací a uživatelských rozhraní. Rád vytvářím čisté, efektivní a vizuálně přitažlivé produkty.</p>
+            <p>Mé projekty kombinují technickou preciznost s kreativním designem. Neustále se vzdělávám a sleduji nejnovější trendy ve webovém vývoji.</p>
+        </section>
         
-        <div class="sidebar">
-            <h3>Novinky</h3>
-            <p>Právě jsme spustili nový web pro našeho klienta!</p>
-            
-            <h3>Kontakt</h3>
-            <p>Email: info@mojefirma.cz<br>
-            Telefon: +420 123 456 789</p>
-        </div>
+        <section id="projects">
+            <h2>Projekty</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>E-shop Platforma</h3>
+                        <p>Kompletní řešení pro online prodej s pokročilou administrací a analytikou.</p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Mobilní Aplikace</h3>
+                        <p>Aplikace pro správu osobních financí s synchronizací mezi zařízeními.</p>
+                        <div class="project-tags">
+                            <span class="tag">React Native</span>
+                            <span class="tag">Firebase</span>
+                            <span class="tag">Redux</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Analytický Dashboard</h3>
+                        <p>Real-time dashboard pro vizualizaci obchodních dat a metrik.</p>
+                        <div class="project-tags">
+                            <span class="tag">Vue.js</span>
+                            <span class="tag">D3.js</span>
+                            <span class="tag">Express</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills">
+            <h2>Dovednosti</h2>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-js"></i></div>
+                    <div>JavaScript/ES6+</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-react"></i></div>
+                    <div>React</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-node-js"></i></div>
+                    <div>Node.js</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                    <div>HTML5</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                    <div>CSS3/SASS</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fas fa-database"></i></div>
+                    <div>MongoDB</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                    <div>Git</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fas fa-paint-brush"></i></div>
+                    <div>UI/UX Design</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h2>Kontakt</h2>
+            <div class="contact-grid">
+                <div class="contact-form">
+                    <form>
+                        <input type="text" placeholder="Jméno" required>
+                        <input type="email" placeholder="Email" required>
+                        <input type="text" placeholder="Předmět">
+                        <textarea rows="5" placeholder="Zpráva" required></textarea>
+                        <button type="submit" class="btn">Odeslat</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div>jan.novak@example.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div>+420 123 456 789</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>Praha, Česká republika</div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     
     <footer>
-        <p>&copy; 2023 Moje Firma. Všechna práva vyhrazena.</p>
+        <p>&copy; 2023 Jan Novák. Všechna práva vyhrazena.</p>
     </footer>
+    
+    <script>
+        // Animace při scrollování
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Hladký scroll pro navigaci
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
